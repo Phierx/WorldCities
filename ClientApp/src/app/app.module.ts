@@ -7,6 +7,8 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
+
+//Instead of deletion I wanted to just comment it out So I can see the changes the way it happening
 //import { CounterComponent } from './counter/counter.component';
 //import { FetchDataComponent } from './fetch-data/fetch-data.component';
 
