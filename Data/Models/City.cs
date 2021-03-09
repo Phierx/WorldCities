@@ -19,6 +19,8 @@ namespace WorldCities.Data.Models
         /// </summary>
         [Key]
         [Required]
+        [ForeignKey("Country")]
+
         public int Id { get; set; }
         /// <summary>
         /// City name (in UTF8 format)
@@ -40,6 +42,21 @@ namespace WorldCities.Data.Models
         /// <summary>
         /// Country Id (foreign key)
         /// </summary>
+        [ForeignKey("Country")]
         public int CountryId { get; set; }
+        
+        #region Navigation Properties
+        /// <summary>
+        /// The country related to this city.
+        /// </summary>
+        public virtual Country Country { get; set; }
+        #endregion
+        #region Navigation Properties
+        /// <summary>
+        /// A list containing all the cities related to this country.
+        /// </summary>
+        public virtual List<City> Cities { get; set; }
+        #endregion
+
     }
 }
