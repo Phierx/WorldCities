@@ -19,7 +19,7 @@ namespace WorldCities.Data.Models
         /// </summary>
         [Key]
         [Required]
-        [ForeignKey("Country")]
+       
 
         public int Id { get; set; }
         /// <summary>
@@ -33,12 +33,15 @@ namespace WorldCities.Data.Models
         /// <summary>
         /// City latitude
         /// </summary>
+        [Column(TypeName ="decimal(7,4)")]
         public decimal Lat { get; set; }
         /// <summary>
         /// City longitude
         /// </summary>
+        [Column(TypeName = "decimal(7,4)")]
         public decimal Lon { get; set; }
         #endregion
+        
         /// <summary>
         /// Country Id (foreign key)
         /// </summary>
@@ -51,12 +54,7 @@ namespace WorldCities.Data.Models
         /// </summary>
         public virtual Country Country { get; set; }
         #endregion
-        #region Navigation Properties
-        /// <summary>
-        /// A list containing all the cities related to this country.
-        /// </summary>
-        public virtual List<City> Cities { get; set; }
-        #endregion
+       
 
     }
 }
