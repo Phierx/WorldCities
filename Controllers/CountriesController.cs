@@ -42,9 +42,7 @@ namespace WorldCities.Controllers
             return country;
         }
 
-        // PUT: api/Countries/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
+   
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCountry(int id, Country country)
         {
@@ -74,9 +72,7 @@ namespace WorldCities.Controllers
             return NoContent();
         }
 
-        // POST: api/Countries
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
+       
         [HttpPost]
         public async Task<ActionResult<Country>> PostCountry(Country country)
         {
@@ -86,7 +82,6 @@ namespace WorldCities.Controllers
             return CreatedAtAction("GetCountry", new { id = country.Id }, country);
         }
 
-        // DELETE: api/Countries/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<Country>> DeleteCountry(int id)
         {
