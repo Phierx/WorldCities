@@ -19,13 +19,13 @@ namespace WorldCities.Controllers
         {
             _context = context;
         }
-        // GET: api/Cities
+       
         [HttpGet]
         public async Task<ActionResult<IEnumerable<City>>> GetCities()
         {
             return await _context.Cities.ToListAsync();
         }
-        // GET: api/Cities/5
+        
         [HttpGet("{id}")]
         public async Task<ActionResult<City>> GetCity(int id)
         {
@@ -36,10 +36,7 @@ namespace WorldCities.Controllers
             }
             return city;
         }
-        // PUT: api/Cities/5
-        // To protect from overposting attacks, please enable the
-        // specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
+       
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCity(int id, City city)
         {
@@ -65,10 +62,7 @@ namespace WorldCities.Controllers
             }
             return NoContent();
         }
-        // POST: api/Cities
-        // To protect from overposting attacks, please enable the
-        // specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
+        
         [HttpPost]
         public async Task<ActionResult<City>> PostCity(City city)
         {
@@ -77,7 +71,7 @@ namespace WorldCities.Controllers
             return CreatedAtAction("GetCity", new { id = city.Id },
             city);
         }
-        // DELETE: api/Cities/5
+       
         [HttpDelete("{id}")]
         public async Task<ActionResult<City>> DeleteCity(int id)
         {
