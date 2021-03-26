@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
+import { CitiesComponent } from './cities/cities.component';
 
 //Instead of deletion I wanted to just comment it out So I can see the changes the way it happening
 //import { CounterComponent } from './counter/counter.component';
@@ -17,6 +18,7 @@ import { HomeComponent } from './home/home.component';
     AppComponent,
     NavMenuComponent,
     HomeComponent,
+    CitiesComponent
    // CounterComponent,
    // FetchDataComponent
   ],
@@ -26,6 +28,7 @@ import { HomeComponent } from './home/home.component';
     FormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: 'cities', component: CitiesComponent },
       //{ path: 'counter', component: CounterComponent },
      // { path: 'fetch-data', component: FetchDataComponent },
     ])
