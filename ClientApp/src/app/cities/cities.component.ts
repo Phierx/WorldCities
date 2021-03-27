@@ -11,13 +11,14 @@ export class CitiesComponent {
   public cities: City[];
   constructor(
     private http: HttpClient,
-    @Inject('BASE_URL') private baseUrl: string) {
-  }
+    @Inject('BASE_URL') private baseUrl: string) { }
+
+
   ngOnInit() {
-    this.http.get<City[]>(this.baseUrl + 'api/Cities')
-      .subscribe(result => {
-        this.cities = result;
-      }, error => console.error(error));
+
+    
+    this.http.get<City[]>('https://localhost:44330/' + 'api/Cities').subscribe(result => { this.cities = result; }, error => console.error(error));
+    //http.get<City[]>(baseUrl + 'api/Cities').subscribe(result => { this.cities = result;}, error => console.error(error));
   }
 
 }
