@@ -23,9 +23,17 @@ namespace WorldCities
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews().AddJsonOptions(options => { options.JsonSerializerOptions.WriteIndented = true;
+            }); 
+            services.AddSpaStaticFiles(configuration =>
+            {
+                configuration.RootPath = "ClientApp/dist";
             });
+            // Add ApplicationDbContext.
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")
+            )
+            );
 
-            
+
         }
 
 
