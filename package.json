@@ -1,0 +1,29 @@
+{
+  "name": "quit",
+  "version": "1.0.0",
+  "description": "new to this",
+  "main": "index.js",
+  "dependencies": {
+    "@angular/cli": "^11.2.8",
+    "express": "^4.17.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Phierx/WorldCities.git"
+  },
+  "keywords": [
+    "trying",
+    "to",
+    "revive",
+    "app.js"
+  ],
+  "author": "Phierx",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Phierx/WorldCities/issues"
+  },
+  "homepage": "https://github.com/Phierx/WorldCities#readme"
+}
