@@ -8,7 +8,8 @@ import { City } from './city';
   styleUrls: ['./cities.component.css']
 })
 export class CitiesComponent {
-  public cities: City[];
+
+  public displayedColumns: string[] = ['id', 'name', 'lat', 'lon'];
   constructor(
     private http: HttpClient,@Inject('BASE_URL') private baseUrl: string) { }
 
