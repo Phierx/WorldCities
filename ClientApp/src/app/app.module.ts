@@ -35,7 +35,7 @@ import { AngularMaterialModule } from './angular-material.module';
       { path: 'cities', component: CitiesComponent },
       //{ path: 'counter', component: CounterComponent },
      // { path: 'fetch-data', component: FetchDataComponent },
-    ])
+    ]),
     BrowserAnimationsModule,
     AngularMaterialModule
 
