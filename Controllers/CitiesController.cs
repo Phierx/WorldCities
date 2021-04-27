@@ -21,9 +21,13 @@ namespace WorldCities.Controllers
         }
        
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<City>>> GetCities()
+        public async Task<ActionResult<IEnumerable<City>>> GetCities(
+            int pageIndex = 0,
+            int pageSize = 10
+
+            )
         {
-            return await _context.Cities.ToListAsync();
+            return await _context.Cities.Skip(pageIndex * pageSize).Take(pageSize).ToListAsync();
         }
         
         [HttpGet("{id}")]
