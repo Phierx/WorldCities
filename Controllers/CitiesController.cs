@@ -19,17 +19,18 @@ namespace WorldCities.Controllers
         {
             _context = context;
         }
-       
+
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<City>>> GetCities(
+        [Route("{pageIndex?}/{pageSize?}")]
+        public async Task<ActionResult<ApiResult<City>>> GetCities(
             int pageIndex = 0,
             int pageSize = 10
 
             )
         {
-            return await _context.Cities.Skip(pageIndex * pageSize).Take(pageSize).ToListAsync();
+            return await ApiResult<City>.CreateAsync(_context.Cities, pageIndex, pageSize);
         }
-        
+    
         [HttpGet("{id}")]
         public async Task<ActionResult<City>> GetCity(int id)
         {
