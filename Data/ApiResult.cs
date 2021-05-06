@@ -36,7 +36,9 @@ namespace WorldCities.Data
         /// A object containing the paged result
         /// and all the relevant paging navigation info.
         /// </returns>
-        public static async Task<ApiResult<T>> CreateAsync( IQueryable<T> source,int pageIndex,  int pageSize)
+        public static async Task<ApiResult<T>> CreateAsync(  IQueryable<T> source,
+        int pageIndex,
+        int pageSize)
         {
             var count = await source.CountAsync();
             source = source.Skip(pageIndex * pageSize).Take(pageSize);
