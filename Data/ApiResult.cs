@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Linq.Dynamic.Core;
+using System.Reflection;
 namespace WorldCities.Data
 {
     public class ApiResult<T>
@@ -14,13 +16,18 @@ namespace WorldCities.Data
         List<T> data,
         int count,
         int pageIndex,
-        int pageSize)
+        int pageSize, 
+        string sortColumn,
+        string sortOrder)
         {
             Data = data;
             PageIndex = pageIndex;
             PageSize = pageSize;
             TotalCount = count;
             TotalPages = (int)Math.Ceiling(count / (double)pageSize);
+            SortColumn = sortColumn;
+            SortOrder = sortOrder;
+
         }
         #region Methods
         /// <summary>
@@ -38,16 +45,38 @@ namespace WorldCities.Data
         /// </returns>
         public static async Task<ApiResult<T>> CreateAsync(  IQueryable<T> source,
         int pageIndex,
-        int pageSize)
+        int pageSize,
+        string sortColumn = null,
+        string sortOrder = null)
+
+        
         {
             var count = await source.CountAsync();
-            source = source.Skip(pageIndex * pageSize).Take(pageSize);
+            if (!String.IsNullOrEmpty(sortColumn) && IsValidProperty(sortColumn))
+            {
+                sortOrder = !String.IsNullOrEmpty(sortOrder)
+                && sortOrder.ToUpper() == "ASC"
+                ? "ASC"
+                : "DESC";
+                source = source.OrderBy( String.Format("{0} {1}", sortColumn, sortOrder)
+                );
+            }
+            source = source
+            .Skip(pageIndex * pageSize)
+            .Take(pageSize);
             var data = await source.ToListAsync();
             return new ApiResult<T>(
-            data,
+                       data,
             count,
             pageIndex,
-            pageSize);
+            pageSize,
+            sortColumn,
+            sortOrder);
+        }
+
+        private static bool IsValidProperty(string sortColumn)
+        {
+            throw new NotImplementedException();
         }
         #endregion
         #region Properties
@@ -93,5 +122,14 @@ namespace WorldCities.Data
             }
         }
         #endregion
+        /// <summary>
+        /// Sorting Column name (or null if none set)
+        /// </summary>
+        public string SortColumn { get; set; }
+        /// <summary>
+        /// Sorting Order ("ASC", "DESC" or null if none set)
+        /// </summary>
+        public string SortOrder { get; set; }
+
     }
 }
