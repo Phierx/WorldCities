@@ -74,11 +74,25 @@ namespace WorldCities.Data
             sortOrder);
         }
 
-        private static bool IsValidProperty(string sortColumn)
+        public static bool IsValidProperty(
+        string propertyName,
+        bool throwExceptionIfNotFound = true)
         {
-            throw new NotImplementedException();
+            var prop = typeof(T).GetProperty(
+            propertyName,
+            BindingFlags.IgnoreCase |
+            BindingFlags.Public |
+            BindingFlags.Instance);
+            if (prop == null && throwExceptionIfNotFound)
+                throw new NotSupportedException(
+                String.Format(
+                "ERROR: Property '{0}' does not exist.",
+                propertyName)
+                );
+            return prop != null;
         }
         #endregion
+
         #region Properties
         /// <summary>
         /// The data result.
