@@ -15,32 +15,37 @@ export class CitiesComponent {
   public displayedColumns: string[] = ['id', 'name', 'lat', 'lon'];
   public cities: MatTableDataSource<City>;
 
- // not in the book// dataSource: MatTableDataSource<City>;
-
   defaultPageIndex: number = 0;
   defaultPageSize: number = 10;
   public defaultSortColumn: string = "name";
   public defaultSortOrder: string = "asc";
 
+  defaultFilterColumn: string = "name";
+  filterQuery: string = null;
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-
-  constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) { }
-  ngOnInit() {
-    this.loadData();
+  constructor(
+    private http: HttpClient,
+    @Inject('BASE_URL') private baseUrl: string) {
   }
 
-  loadData() {
+  ngOnInit() {
+    this.loadData(null);
+  }
+
+  loadData(query: string = null) {
     var pageEvent = new PageEvent();
     pageEvent.pageIndex = this.defaultPageIndex;
     pageEvent.pageSize = this.defaultPageSize;
+    if (query) {
+      this.filterQuery = query;
+    }
     this.getData(pageEvent);
   }
 
-
   getData(event: PageEvent) {
-   
     var url = this.baseUrl + 'api/Cities';
     var params = new HttpParams()
       .set("pageIndex", event.pageIndex.toString())
@@ -51,6 +56,12 @@ export class CitiesComponent {
       .set("sortOrder", (this.sort)
         ? this.sort.direction
         : this.defaultSortOrder);
+
+    if (this.filterQuery) {
+      params = params
+        .set("filterColumn", this.defaultFilterColumn)
+        .set("filterQuery", this.filterQuery);
+    }
 
     this.http.get<any>(url, { params })
       .subscribe(result => {
