@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { CitiesComponent } from './cities/cities.component';
+import { CountriesComponent } from './countries/countries.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialModule } from './angular-material.module';
 
@@ -22,7 +23,8 @@ import { AngularMaterialModule } from './angular-material.module';
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    CitiesComponent
+    CitiesComponent,
+    CountriesComponent
    // CounterComponent,
    // FetchDataComponent
   ],
@@ -35,6 +37,7 @@ import { AngularMaterialModule } from './angular-material.module';
       { path: 'cities', component: CitiesComponent },
       //{ path: 'counter', component: CounterComponent },
      // { path: 'fetch-data', component: FetchDataComponent },
+      { path: 'countries', component: CountriesComponent }
     ]),
     BrowserAnimationsModule,
     AngularMaterialModule
