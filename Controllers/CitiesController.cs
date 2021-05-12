@@ -15,44 +15,47 @@ namespace WorldCities.Controllers
     public class CitiesController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+
         public CitiesController(ApplicationDbContext context)
         {
             _context = context;
         }
 
+     
         [HttpGet]
-        [Route("{pageIndex?}/{pageSize?}")]
         public async Task<ActionResult<ApiResult<City>>> GetCities(
-            int pageIndex = 0,
-            int pageSize = 10,
-            string sortColumn = null,
-            string sortOrder = null,
-
-            string filterColumn = null,
-            string filterQuery = null)
-        
+                int pageIndex = 0,
+                int pageSize = 10,
+                string sortColumn = null,
+                string sortOrder = null,
+                string filterColumn = null,
+                string filterQuery = null)
         {
-            // first we perform the filtering...
-            var cities = _context.Cities;
-            if (!String.IsNullOrEmpty(filterColumn) && !String.IsNullOrEmpty(filterQuery))
-            {
-                cities = (DbSet<City>)cities.Where(c => c.Name.Contains(filterQuery));
-            }
-            // ... and then we call the ApiResult
-            return await ApiResult<City>.CreateAsync(cities, pageIndex, pageSize,  sortColumn,sortOrder);
-          
-    }
+            return await ApiResult<City>.CreateAsync(
+                    _context.Cities,
+                    pageIndex,
+                    pageSize,
+                    sortColumn,
+                    sortOrder,
+                    filterColumn,
+                    filterQuery);
+        }
+
+        // GET: api/Cities/5
         [HttpGet("{id}")]
         public async Task<ActionResult<City>> GetCity(int id)
         {
             var city = await _context.Cities.FindAsync(id);
+
             if (city == null)
             {
                 return NotFound();
             }
+
             return city;
         }
-       
+
+        
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCity(int id, City city)
         {
@@ -60,7 +63,9 @@ namespace WorldCities.Controllers
             {
                 return BadRequest();
             }
+
             _context.Entry(city).State = EntityState.Modified;
+
             try
             {
                 await _context.SaveChangesAsync();
@@ -76,17 +81,20 @@ namespace WorldCities.Controllers
                     throw;
                 }
             }
+
             return NoContent();
         }
-        
+
+       
         [HttpPost]
         public async Task<ActionResult<City>> PostCity(City city)
         {
             _context.Cities.Add(city);
             await _context.SaveChangesAsync();
-            return CreatedAtAction("GetCity", new { id = city.Id },
-            city);
+
+            return CreatedAtAction("GetCity", new { id = city.Id }, city);
         }
+
        
         [HttpDelete("{id}")]
         public async Task<ActionResult<City>> DeleteCity(int id)
@@ -96,14 +104,16 @@ namespace WorldCities.Controllers
             {
                 return NotFound();
             }
+
             _context.Cities.Remove(city);
             await _context.SaveChangesAsync();
+
             return city;
         }
+
         private bool CityExists(int id)
         {
             return _context.Cities.Any(e => e.Id == id);
         }
     }
 }
-
