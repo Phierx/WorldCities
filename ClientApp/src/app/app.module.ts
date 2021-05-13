@@ -9,10 +9,11 @@ import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { CitiesComponent } from './cities/cities.component';
+import { CityEditComponent } from './cities/city-edit.component';
 import { CountriesComponent } from './countries/countries.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialModule } from './angular-material.module';
-
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 //Instead of deletion I wanted to just comment it out So I can see the changes the way it happening
 //import { CounterComponent } from './counter/counter.component';
@@ -24,6 +25,8 @@ import { AngularMaterialModule } from './angular-material.module';
     NavMenuComponent,
     HomeComponent,
     CitiesComponent,
+    CityEditComponent,
+
     CountriesComponent
    // CounterComponent,
    // FetchDataComponent
@@ -37,10 +40,13 @@ import { AngularMaterialModule } from './angular-material.module';
       { path: 'cities', component: CitiesComponent },
       //{ path: 'counter', component: CounterComponent },
      // { path: 'fetch-data', component: FetchDataComponent },
+      { path: 'city/:id', component: CityEditComponent },
       { path: 'countries', component: CountriesComponent }
     ]),
     BrowserAnimationsModule,
-    AngularMaterialModule
+    AngularMaterialModule,
+    ReactiveFormsModule
+
 
   ],
   providers: [],
