@@ -41,18 +41,6 @@
 
   <ItemGroup>
     <None Remove="ClientApp\src\app\cities\angular-material.module.ts" />
-    <None Remove="ClientApp\src\app\cities\city-edit.component.css" />
-    <None Remove="ClientApp\src\app\cities\city-edit.component.html" />
-    <None Remove="ClientApp\src\app\cities\city-edit.component.ts" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <TypeScriptCompile Include="ClientApp\src\app\cities\city-edit.component.css">
-      <SubType>Code</SubType>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="ClientApp\src\app\cities\city-edit.component.html">
-      <SubType>Code</SubType>
-    </TypeScriptCompile>
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
