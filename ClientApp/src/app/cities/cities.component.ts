@@ -6,6 +6,8 @@ import { MatSort } from '@angular/material/sort';
 
 import { City } from './city';
 
+import { Country } from './../countries/Country';
+
 @Component({
   selector: 'app-cities',
   templateUrl: './cities.component.html',
