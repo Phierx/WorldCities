@@ -40,7 +40,7 @@ export class CountriesComponent {
     pageEvent.pageIndex = this.defaultPageIndex;
     pageEvent.pageSize = this.defaultPageSize;
     if (query) {
-        this.filterQuery = query;
+      this.filterQuery = query;
     }
     this.getData(pageEvent);
   }

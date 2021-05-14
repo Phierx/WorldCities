@@ -21,7 +21,10 @@ namespace WorldCities.Controllers
             _context = context;
         }
 
-     
+        // GET: api/Cities
+        // GET: api/Cities/?pageIndex=0&pageSize=10
+        // GET: api/Cities/?pageIndex=0&pageSize=10&sortColumn=name&sortOrder=asc
+        // GET: api/Cities/?pageIndex=0&pageSize=10&sortColumn=name&sortOrder=asc&filterColumn=name&filterQuery=york
         [HttpGet]
         public async Task<ActionResult<ApiResult<City>>> GetCities(
                 int pageIndex = 0,
@@ -55,7 +58,7 @@ namespace WorldCities.Controllers
             return city;
         }
 
-        
+       
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCity(int id, City city)
         {
@@ -63,6 +66,8 @@ namespace WorldCities.Controllers
             {
                 return BadRequest();
             }
+
+           
 
             _context.Entry(city).State = EntityState.Modified;
 
@@ -95,7 +100,6 @@ namespace WorldCities.Controllers
             return CreatedAtAction("GetCity", new { id = city.Id }, city);
         }
 
-       
         [HttpDelete("{id}")]
         public async Task<ActionResult<City>> DeleteCity(int id)
         {
@@ -114,6 +118,18 @@ namespace WorldCities.Controllers
         private bool CityExists(int id)
         {
             return _context.Cities.Any(e => e.Id == id);
+        }
+
+        [HttpPost]
+        [Route("IsDupeCity")]
+        public bool IsDupeCity(City city)
+        {
+            return _context.Cities.Any(
+                e => e.Name == city.Name
+                && e.Lat == city.Lat
+                && e.Lon == city.Lon
+                && e.CountryId == city.CountryId
+                && e.Id != city.Id);
         }
     }
 }
