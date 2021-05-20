@@ -44,7 +44,8 @@ export class CityEditComponent {
       name: new FormControl('', Validators.required),
       lat: new FormControl('', Validators.required),
       lon: new FormControl('', Validators.required),
-      countryId: new FormControl('', Validators.required)
+      countryId: new FormControl('', Validators.required),
+      description: new FormControl('', Validators.required)
     }, null, this.isDupeCity());
 
     this.loadData();
@@ -79,7 +80,7 @@ export class CityEditComponent {
 
   loadCountries() {
     // fetch all the countries from the server
-    var url = this.baseUrl + "api/countries?pageIndex=0&pageSize=9999&sortColumn=name";
+    var url = this.baseUrl + 'api/Cities';
     var params = new HttpParams()
       .set("pageIndex", "0")
       .set("pageSize", "9999")
@@ -98,6 +99,7 @@ export class CityEditComponent {
     city.lat = +this.form.get("lat").value;
     city.lon = +this.form.get("lon").value;
     city.countryId = +this.form.get("countryId").value;
+    city.description = this.form.get("description").value;
 
     if (this.id) {
       // EDIT mode
@@ -137,6 +139,7 @@ export class CityEditComponent {
       city.lat = +this.form.get("lat").value;
       city.lon = +this.form.get("lon").value;
       city.countryId = +this.form.get("countryId").value;
+      city.description = this.form.get("description").value;
 
       var url = this.baseUrl + "api/cities/IsDupeCity";
       return this.http.post<boolean>(url, city).pipe(map(result => {

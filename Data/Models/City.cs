@@ -30,6 +30,7 @@ namespace WorldCities.Data.Models
         /// City name (in ASCII format)
         /// </summary>
         public string Name_ASCII { get; set; }
+
         /// <summary>
         /// City latitude
         /// </summary>
@@ -54,7 +55,10 @@ namespace WorldCities.Data.Models
         /// </summary>
         public virtual Country Country { get; set; }
         #endregion
-       
-
+        
+        /// <summary>
+        /// City name (in UTF8 format)
+        /// </summary>
+        public string Description { get; set; }
     }
 }

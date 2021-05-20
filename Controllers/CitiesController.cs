@@ -44,7 +44,7 @@ namespace WorldCities.Controllers
                     filterQuery);
         }
 
-        // GET: api/Cities/5
+      
         [HttpGet("{id}")]
         public async Task<ActionResult<City>> GetCity(int id)
         {
@@ -125,11 +125,15 @@ namespace WorldCities.Controllers
         public bool IsDupeCity(City city)
         {
             return _context.Cities.Any(
-                e => e.Name == city.Name
+                e => 
+                e.Name == city.Name
                 && e.Lat == city.Lat
                 && e.Lon == city.Lon
                 && e.CountryId == city.CountryId
-                && e.Id != city.Id);
+                && e.Id != city.Id
+                
+
+                );
         }
     }
 }
